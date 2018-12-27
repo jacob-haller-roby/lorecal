@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "postinstall": "cd client && npm install --production",
+    "install:react": "cd client && npm install --production",
     "build": "npm run build --prefix ./client",
     "start": "node ./bin/www & npm start --prefix ./client"
   },
