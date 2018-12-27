@@ -13,9 +13,6 @@ steps:
   args: ['install', '--production']
 
 - name: 'gcr.io/cloud-builders/npm'
-  args: ['run', 'gcp-build']
-
-- name: 'gcr.io/cloud-builders/npm'
   args: ['run', 'build']
 
 - name: "gcr.io/cloud-builders/gcloud"
