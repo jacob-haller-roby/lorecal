@@ -1,6 +1,6 @@
 'use strict';
 
-const sql = require('./connection');
+const sql = require('../connection');
 
 const User = (user) => {
     this.username = user.username;

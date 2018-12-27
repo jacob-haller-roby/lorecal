@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const User = require('../dao/User');
+const User = require('../db/dao/User');
 
 router.get('/users', (req,res) => {
     console.log('inside users api')
