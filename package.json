@@ -5,7 +5,7 @@
   "scripts": {
     "install:react": "cd client && npm install --production",
     "gcp-build": "npm run-script install:react",
-    "build": "npm run build --prefix ./client & npm run-script migrate",
+    "build": "npm run build --prefix ./client && npm run-script migrate --verbose",
     "start": "npm run-script start:express & npm run-script start:react",
     "start:react": "npm start --prefix ./client",
     "start:express": "node ./bin/www",
