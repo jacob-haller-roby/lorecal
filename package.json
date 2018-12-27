@@ -6,13 +6,16 @@
     "install:react": "cd client && npm install --production",
     "gcp-build": "npm run-script install:react",
     "build": "npm run build --prefix ./client",
-    "start": "node ./bin/www & npm start --prefix ./client"
+    "start": "npm run-script start:express & npm run-script start:react",
+    "start:react": "npm start --prefix ./client",
+    "start:express": "node ./bin/www"
   },
   "dependencies": {
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
     "express": "~4.16.0",
     "morgan": "~1.9.0",
+    "mysql": "^2.16.0",
     "node-sass-middleware": "0.11.0"
   }
 }

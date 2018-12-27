@@ -1,5 +1,13 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+const User = require('../dao/User');
+
+router.get('/users', (req,res) => {
+    console.log('inside users api')
+    User.getAllUsers((err, users) => {
+        res.json(users);
+    });
+});
 
 router.get('/getList', (req,res) => {
     var list = ["item1", "item2", "item3"];
