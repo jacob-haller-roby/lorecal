@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "install:react": "cd client && npm install --production",
+    "gcp-build": "npm run-script install:react",
     "build": "npm run build --prefix ./client",
     "start": "node ./bin/www & npm start --prefix ./client"
   },
