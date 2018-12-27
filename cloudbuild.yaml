@@ -14,7 +14,7 @@ steps:
 
 - name: 'gcr.io/cloud-builders/npm'
   args: ['install', '--production']
-  directory: 'client'
+  dir: 'client'
 
 - name: 'gcr.io/cloud-builders/npm'
   args: ['run', 'build']
