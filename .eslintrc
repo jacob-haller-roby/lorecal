@@ -1,0 +1,23 @@
+{
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended"
+  ],
+  "rules": {
+    // enable additional rules
+    "indent": [
+      "error",
+      4,
+      {
+        "SwitchCase": 1
+      }
+    ],
+    "no-console": "off"
+  },
+  "globals": {
+    "document": true,
+    "window": true,
+    "fetch": true,
+    "console": true
+  }
+}
