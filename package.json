@@ -5,10 +5,10 @@
   "scripts": {
     "install:react": "cd client && npm install --production",
     "gcp-build": "npm run-script install:react",
-    "build": "npm run build --prefix ./client && npm run-script migrate --verbose",
+    "build": "npm run build --prefix ./client",
     "start": "npm run-script start:express & npm run-script start:react",
     "start:react": "npm start --prefix ./client",
-    "start:express": "node ./bin/www",
+    "start:express": "npm run-script migrate && node ./bin/www",
     "migrate": "node db/migrations.js up",
     "migrate:down": "node db/migrations.js down"
   },
