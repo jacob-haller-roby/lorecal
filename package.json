@@ -9,7 +9,7 @@
     "install:react": "cd client && npm install --production",
     "gcp-build": "npm run-script install:react",
     "build": "npm run build --prefix ./client",
-    "start": "concurrently \"npm run-script start:express\" \"npm run-script start:react\"",
+    "start": "npm run-script start:express",
     "start:react": "npm start --prefix ./client",
     "start:express": "npm run-script migrate && node ./bin/www",
     "migrate": "./node_modules/knex/bin/cli.js migrate:latest"
