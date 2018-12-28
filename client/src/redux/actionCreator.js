@@ -47,7 +47,7 @@ export const login = (username, password) =>
 
 export const logout = () =>
         dispatch =>
-            post('Users/logout')
+            post('/logout')
                 .then(() => {
                     dispatch({
                         type: ACTIONS.LOGOUT
