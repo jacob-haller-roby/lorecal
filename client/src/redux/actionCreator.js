@@ -5,7 +5,7 @@ import {get, post} from './helper';
 
 export const verifyLoginStatus = () =>
         dispatch =>
-            get('Users/me')
+            get('user/me')
                 .then(response => {
                     dispatch({
                         type: ACTIONS.LOGIN,
