@@ -29,12 +29,12 @@ export const verifyLoginStatus = () =>
 export const login = (username, password) =>
         dispatch =>
             post('login', {username, password})
-                .then(response => {
+                .then(user => {
                     dispatch({
                         type: ACTIONS.LOGIN,
                         payload: {
-                            currentUserId: response.userId,
-                            currentUsername: username
+                            currentUserId: user.id,
+                            currentUsername: user.username
                         }
                     });
                 })
@@ -47,7 +47,7 @@ export const login = (username, password) =>
 
 export const logout = () =>
         dispatch =>
-            post('logout')
+            get('logout')
                 .then(() => {
                     dispatch({
                         type: ACTIONS.LOGOUT
