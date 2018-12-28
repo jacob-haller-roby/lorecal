@@ -60,7 +60,7 @@ User.isPasswordValid = (userFilter, password) => {
         .where(userFilter)
         .first()
         .then(user => bcrypt.compare(password, user.password)
-            .then(valid => valid ? user : null)
+            .then(valid => valid ? User.sanitize(user) : null)
         );
 };
 

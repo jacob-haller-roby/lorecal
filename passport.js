@@ -11,7 +11,8 @@ passport.use(new LocalStrategy(
                     return done(null, user)
                 }
                 return done(null, false, {message: 'Invalid username password combination'})
-            });
+            })
+            .catch(() => done(null, false, {message: 'Invalid username password combination;'}));
     }
 ));
 

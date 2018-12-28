@@ -28,7 +28,7 @@ export const verifyLoginStatus = () =>
 
 export const login = (username, password) =>
         dispatch =>
-            post('/login', {username, password})
+            post('login', {username, password})
                 .then(response => {
                     dispatch({
                         type: ACTIONS.LOGIN,
@@ -47,7 +47,7 @@ export const login = (username, password) =>
 
 export const logout = () =>
         dispatch =>
-            post('/logout')
+            post('logout')
                 .then(() => {
                     dispatch({
                         type: ACTIONS.LOGOUT
