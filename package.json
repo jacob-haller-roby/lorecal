@@ -2,6 +2,9 @@
   "name": "lorecal",
   "version": "0.0.0",
   "private": true,
+  "workspaces": [
+    "lorecal"
+  ],
   "scripts": {
     "install:react": "cd client && npm install --production",
     "gcp-build": "npm run-script install:react",
@@ -9,16 +12,22 @@
     "start": "npm run-script start:express & npm run-script start:react",
     "start:react": "npm start --prefix ./client",
     "start:express": "npm run-script migrate && node ./bin/www",
-    "migrate": "node db/migrations.js up",
-    "migrate:down": "node db/migrations.js down"
+    "migrate": "./node_modules/knex/bin/cli.js migrate:latest"
   },
   "dependencies": {
+    "bcrypt": "^3.0.3",
+    "body-parser": "^1.18.3",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
     "express": "~4.16.0",
+    "express-session": "^1.15.6",
+    "knex": "^0.16.3",
     "morgan": "~1.9.0",
     "mysql": "^2.16.0",
     "mysql-migrations": "^1.0.6",
-    "node-sass-middleware": "0.11.0"
+    "node-sass-middleware": "0.11.0",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "sexy-require": "^1.1.2"
   }
 }
