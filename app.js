@@ -6,6 +6,8 @@ const sassMiddleware = require('node-sass-middleware');
 const bodyParser = require('body-parser');
 const expressSession = require('express-session');
 require('sexy-require');
+const MySQLStore = require('express-mysql-session')(expressSession);
+const knex_configs = require('/knexfile');
 
 const passport = require('./passport');
 const apiRouter = require('./routes/api');
@@ -23,7 +25,9 @@ app.use(sassMiddleware({
     sourceMap: true
 }));
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(expressSession({secret: process.env.SESSION_SECRET, resave: true, saveUninitialized: true}));
+
+const sessionStore = new MySQLStore(knex_configs[process.env.NODE_ENV].connection);
+app.use(expressSession({secret: process.env.SESSION_SECRET, resave: true, saveUninitialized: false, store: sessionStore}));
 app.use(passport.initialize());
 app.use(passport.session());
 
