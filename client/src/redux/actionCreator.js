@@ -28,7 +28,7 @@ export const verifyLoginStatus = () =>
 
 export const login = (username, password) =>
         dispatch =>
-            post('Users/login', {username, password})
+            post('/login', {username, password})
                 .then(response => {
                     dispatch({
                         type: ACTIONS.LOGIN,

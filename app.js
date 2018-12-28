@@ -27,19 +27,6 @@ app.use(expressSession({secret: process.env.SESSION_SECRET, resave: true, saveUn
 app.use(passport.initialize());
 app.use(passport.session());
 
-
-/* START PASSPORT */
-app.post('/login', passport.authenticate('local', {
-    successRedirect: '/',
-    failureRedirect: '/login'
-}));
-
-app.get('/logout', function (req, res) {
-    req.logout();
-    res.redirect('/');
-});
-/* END PASSPORT */
-
 /* START STATICS */
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, 'client/build')));
