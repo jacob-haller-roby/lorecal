@@ -10,6 +10,8 @@ import {Grid} from '@material-ui/core';
 import {Add} from '@material-ui/icons';
 import FabFixed from '../components/FabFixed';
 import NewCampaignDialog from '../components/NewCampaignDialog';
+import AnimateGrid from '../components/AnimateGrid';
+import AnimateTransition from '../components/AnimateTransition';
 
 
 const {myCampaigns} = selectors;
@@ -46,20 +48,22 @@ const Campaigns = createReactClass({
 
     render() {
         return (
-            <div>
-                <Grid container spacing={8}>
-                    {this.props.campaigns.map(campaign => (
-                        <CampaignCard key={campaign.id} campaign={campaign}/>
-                    ))}
-                </Grid>
-                <FabFixed onClick={this.openNewCampaignDialog}
-                          color="secondary">
-                    <Add/>
-                </FabFixed>
-                <NewCampaignDialog open={this.state.newCampaignDialogOpen}
-                                   handleClose={this.closeNewCampaignDialog}
-                                   submit={this.props.createCampaign}/>
-            </div>
+            <AnimateTransition>
+                <div>
+                    <AnimateGrid>
+                        {this.props.campaigns.map(campaign => (
+                            <CampaignCard key={campaign.id} campaign={campaign}/>
+                        ))}
+                    </AnimateGrid>
+                    <FabFixed onClick={this.openNewCampaignDialog}
+                              color="secondary">
+                        <Add/>
+                    </FabFixed>
+                    <NewCampaignDialog open={this.state.newCampaignDialogOpen}
+                                       handleClose={this.closeNewCampaignDialog}
+                                       submit={this.props.createCampaign}/>
+                </div>
+            </AnimateTransition>
         );
     }
 });

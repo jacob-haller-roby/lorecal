@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import createReactClass from 'create-react-class';
 import {TextField, Button} from '@material-ui/core';
+import AnimateTransition from '../components/AnimateTransition';
 
 import {login} from '../redux/actions/sessionActionCreator';
 
@@ -39,44 +40,46 @@ const LoginForm = createReactClass({
 
     render() {
         return (
-            <div>
-                <h1>Login</h1>
+            <AnimateTransition>
+                <div>
+                    <h1>Login</h1>
 
-                <br/>
+                    <br/>
 
-                <TextField
-                    id="username"
-                    label="username"
-                    value={this.state.username}
-                    onChange={this.handleChange('username')}
-                    margin="normal"
-                    variant="outlined"
-                    error={this.showError()}
-                />
+                    <TextField
+                        id="username"
+                        label="username"
+                        value={this.state.username}
+                        onChange={this.handleChange('username')}
+                        margin="normal"
+                        variant="outlined"
+                        error={this.showError()}
+                    />
 
-                <br/>
+                    <br/>
 
-                <TextField
-                    id="password"
-                    label="password"
-                    value={this.state.password}
-                    onChange={this.handleChange('password')}
-                    margin="normal"
-                    variant="outlined"
-                    type="password"
-                    error={this.showError()}
-                />
+                    <TextField
+                        id="password"
+                        label="password"
+                        value={this.state.password}
+                        onChange={this.handleChange('password')}
+                        margin="normal"
+                        variant="outlined"
+                        type="password"
+                        error={this.showError()}
+                    />
 
-                <br/>
+                    <br/>
 
-                <Button variant="contained"
-                        onClick={this.handleLogin}
-                        color="primary"
-                >
-                    Login
-                </Button>
+                    <Button variant="contained"
+                            onClick={this.handleLogin}
+                            color="primary"
+                    >
+                        Login
+                    </Button>
 
-            </div>
+                </div>
+            </AnimateTransition>
         );
     }
 });

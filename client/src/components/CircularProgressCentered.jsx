@@ -11,7 +11,7 @@ const style = {
 const CircularProgressCentered = ({classes, ...props}) => {
     return (
         <div className={classes.centered}>
-            <CircularProgress {...props}/>
+            <CircularProgress size={100} {...props}/>
         </div>
     );
 };

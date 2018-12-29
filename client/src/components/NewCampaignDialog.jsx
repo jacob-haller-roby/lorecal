@@ -60,16 +60,16 @@ const NewCampaignDialog = createReactClass({
                 </DialogContent>
                 <DialogActions>
                     <Button variant="contained"
-                            color="primary"
-                            onClick={this.submit}
-                            fullWidth>
-                        Create
-                    </Button>
-                    <Button variant="contained"
                             color="secondary"
                             onClick={this.props.handleClose}
                             fullWidth>
                         Cancel
+                    </Button>
+                    <Button variant="contained"
+                            color="primary"
+                            onClick={this.submit}
+                            fullWidth>
+                        Create
                     </Button>
                 </DialogActions>
             </Dialog>

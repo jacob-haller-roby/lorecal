@@ -1,7 +1,7 @@
 import React from 'react';
 import {Route, Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {CircularProgress} from '@material-ui/core';
+import CircularProgressCentered from '../components/CircularProgressCentered';
 
 import selectors from '../redux/selectors';
 
@@ -10,7 +10,7 @@ const {isLoggedIn, loginStatusConfirmed} = selectors;
 const PrivateRouteHOC = (Component) => {
     const Switch = (props) => {
         if (!props.loginStatusConfirmed) {
-            return <CircularProgress/>;
+            return <CircularProgressCentered/>;
         }
 
         return props.isLoggedIn ?

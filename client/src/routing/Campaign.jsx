@@ -7,6 +7,7 @@ import {selectCampaign} from "../redux/actions/selectedActionCreator";
 import selectors from '../redux/selectors/index';
 import {getMyCampaigns} from "../redux/actions/campaignActionCreator";
 import CircularProgressCentered from '../components/CircularProgressCentered';
+import AnimatedTransition from '../components/AnimateTransition';
 
 const {selectedCampaign} = selectors;
 
@@ -35,15 +36,17 @@ const Campaign = createReactClass({
     },
 
     render() {
-        if (!this.routeMatchesRedux()) return <CircularProgressCentered size={100}/>;
+        if (!this.routeMatchesRedux()) return <CircularProgressCentered/>;
 
         return (
-            <Card>
-                <CardHeader title={this.props.selectedCampaign.title}/>
-                <CardContent>
-                    <h2>{this.props.selectedCampaign.description}</h2>
-                </CardContent>
-            </Card>
+            <AnimatedTransition>
+                <Card>
+                    <CardHeader title={this.props.selectedCampaign.title}/>
+                    <CardContent>
+                        <h2>{this.props.selectedCampaign.description}</h2>
+                    </CardContent>
+                </Card>
+            </AnimatedTransition>
         );
     }
 });

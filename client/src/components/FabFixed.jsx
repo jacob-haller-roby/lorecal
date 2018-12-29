@@ -20,8 +20,8 @@ const style = {
     }
 };
 
-const FabFixed = (props) => {
-    const className = props.className === 'bottomLeft' ? props.classes.bottomLeft : props.classes.bottomRight;
+const FabFixed = ({classes, ...props}) => {
+    const className = props.className === 'bottomLeft' ? classes.bottomLeft : classes.bottomRight;
     return (
         <Fab {...props} className={className}/>
     );
