@@ -1,4 +1,4 @@
-import history from '../history';
+import history from '../../history';
 import ACTIONS from './actions';
 import {get, post} from './helper';
 
@@ -26,7 +26,7 @@ export const verifyLoginStatus = () =>
                     })
                 });
 
-export const login = (username, password) =>
+export const login = (username, password, to) =>
         dispatch =>
             post('login', {username, password})
                 .then(user => {
@@ -38,7 +38,7 @@ export const login = (username, password) =>
                         }
                     });
                 })
-                .then(() => history.push('/'))
+                .then(() => history.push(to || '/'))
                 .catch(() => {
                     dispatch({
                         type: ACTIONS.LOGIN_FAILURE

@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import createReactClass from 'create-react-class';
 import {TextField, Button} from '@material-ui/core';
 
-import {login} from '../redux/actionCreator';
+import {login} from '../redux/actions/sessionActionCreator';
 
 const LoginForm = createReactClass({
 
@@ -30,7 +30,7 @@ const LoginForm = createReactClass({
     },
 
     handleLogin() {
-        this.props.login(this.state.username, this.state.password);
+        this.props.login(this.state.username, this.state.password, this.props.location.from && this.props.location.from.pathname);
     },
 
     showError() {
@@ -86,6 +86,6 @@ export default connect(
         loginFailureTimestamp: state.session.loginFailureTimestamp
     }),
     (dispatch) => ({
-        login: (username, password) => dispatch(login(username, password))
+        login: (username, password, to) => dispatch(login(username, password, to))
     })
 )(LoginForm);

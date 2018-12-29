@@ -1,17 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import store from './redux/store';
+import store from '../redux/store';
 import {Provider} from 'react-redux';
 import {Router, Route} from 'react-router-dom';
 import {MuiThemeProvider, withStyles} from '@material-ui/core/styles';
 import {Paper} from '@material-ui/core';
 
-import history from './history';
-import theme from './theme';
+import history from '../history';
+import theme from '../theme';
 
-import Navbar from './components/Navbar';
-import LoginForm from './components/LoginForm';
-import Campaigns from './components/Campaigns';
+import PrivateRoute from './PrivateRoute';
+import Navbar from '../components/Navbar';
+import LoginForm from '../components/LoginForm';
+import Campaigns from '../components/Campaigns';
 
 const Index = () => <h2>Home</h2>;
 
@@ -29,7 +30,7 @@ const AppRouter = (props) => (
                     <Paper style={{padding: 25}}>
                         <Route path="/" exact component={Index}/>
                         <Route path="/login" component={LoginForm}/>
-                        <Route path="/campaigns" component={Campaigns}/>
+                        <Route path="/campaigns" component={PrivateRoute(Campaigns)}/>
                     </Paper>
                 </div>
             </Router>

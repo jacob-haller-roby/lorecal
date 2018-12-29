@@ -6,7 +6,7 @@ import {connect} from 'react-redux';
 import {AppBar, Toolbar, Button, Typography, withStyles} from '@material-ui/core';
 
 import LoginButton from './LoginButton';
-import {verifyLoginStatus} from '../redux/actionCreator';
+import {verifyLoginStatus} from '../redux/actions/sessionActionCreator';
 
 const classes = {
     root: {

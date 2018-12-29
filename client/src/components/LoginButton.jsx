@@ -6,7 +6,7 @@ import {Button, IconButton, Popover, MenuItem, MenuList, withStyles} from '@mate
 import {Person, ExitToApp} from '@material-ui/icons';
 import {Link} from 'react-router-dom';
 
-import {logout} from '../redux/actionCreator';
+import {logout} from '../redux/actions/sessionActionCreator';
 import selectors from '../redux/selectors';
 const {isLoggedIn} = selectors;
 
