@@ -26,7 +26,7 @@ const Campaigns = createReactClass({
         return (
             <div>
                 {this.props.campaigns.map(campaign => (
-                    <div>
+                    <div key={campaign.id}>
                         {campaign.title} - {campaign.id}
                     </div>
                 ))}
