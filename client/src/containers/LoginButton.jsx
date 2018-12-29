@@ -2,13 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import createReactClass from 'create-react-class';
-import {Button, IconButton, Popover, MenuItem, MenuList, withStyles} from '@material-ui/core';
+import {Button, IconButton, Popover, MenuItem, MenuList, CircularProgress, withStyles} from '@material-ui/core';
 import {Person, ExitToApp} from '@material-ui/icons';
 import {Link} from 'react-router-dom';
 
 import {logout} from '../redux/actions/sessionActionCreator';
-import selectors from '../redux/selectors';
-const {isLoggedIn} = selectors;
+import selectors from '../redux/selectors/index';
+const {isLoggedIn, loginStatusConfirmed} = selectors;
 
 const styles = {
     menuIcon: {
@@ -55,6 +55,9 @@ const LoginButton = createReactClass({
     },
 
     render() {
+        if (!this.props.loginStatusConfirmed) {
+            return <CircularProgress/>
+        }
         return this.props.isLoggedIn ? this.renderLogoutButton() : this.renderLoginButton();
     },
 
@@ -106,7 +109,8 @@ const LoginButton = createReactClass({
 
 export default connect(
     (state) => ({
-        isLoggedIn: isLoggedIn(state)
+        isLoggedIn: isLoggedIn(state),
+        loginStatusConfirmed: loginStatusConfirmed(state)
     }),
     (dispatch) => ({
         logout: () => dispatch(logout())

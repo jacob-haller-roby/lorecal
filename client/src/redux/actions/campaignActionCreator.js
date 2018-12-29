@@ -1,5 +1,6 @@
 import ACTIONS from './actions';
 import {get, post} from './helper';
+import history from '../../history';
 
 export const getMyCampaigns = () =>
     (dispatch, getState) => {
@@ -21,3 +22,14 @@ export const getMyCampaigns = () =>
                 })
         ])
     };
+
+export const createCampaign = (campaignData) =>
+    dispatch =>
+        post('campaign', campaignData)
+            .then(campaign => {
+                dispatch({
+                    type: ACTIONS.CREATE_CAMPAIGN,
+                    payload: campaign
+                });
+                history.push('/campaign/' + campaign.id);
+            });

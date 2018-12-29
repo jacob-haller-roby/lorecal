@@ -1,6 +1,6 @@
-const React = require('react');
-const PropTypes = require('prop-types');
-const createReactClass = require('create-react-class');
+import React from 'react';
+import PropTypes from 'prop-types';
+import createReactClass from 'create-react-class';
 
 const Component = createReactClass({
 
@@ -18,4 +18,4 @@ const Component = createReactClass({
     }
 });
 
-module.exports = Component;
+export default Component;

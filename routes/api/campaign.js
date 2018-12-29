@@ -44,7 +44,6 @@ router.get('/player/:playerId', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-    console.log('hit')
     Campaign.create(getBody(req))
         .then(campaign => res.json(campaign))
         .catch((err) => error(err, res));

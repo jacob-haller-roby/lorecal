@@ -53,14 +53,13 @@ const DaoFactory = (constructor, tableName) => {
             .update(data)
             .where({id})
             .returning(COLUMNS.DEFAULT.ID)
-            .then(id => Dao.findOne({id}))
-            .catch(console.log);
+            .then(id => Dao.findOne({id}));
     };
 
     Dao.findOne = (filterData) => {
         return Dao.find(filterData)
             .then(result => {
-                if (result.size) {
+                if (result.length) {
                     return result[0];
                 }
                 return result;

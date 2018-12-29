@@ -10,9 +10,10 @@ import history from '../history';
 import theme from '../theme';
 
 import PrivateRoute from './PrivateRoute';
-import Navbar from '../components/Navbar';
-import LoginForm from '../components/LoginForm';
-import Campaigns from '../components/Campaigns';
+import Navbar from '../containers/Navbar';
+import LoginForm from './LoginForm';
+import Campaigns from './Campaigns';
+import Campaign from './Campaign';
 
 const Index = () => <h2>Home</h2>;
 
@@ -31,6 +32,7 @@ const AppRouter = (props) => (
                         <Route path="/" exact component={Index}/>
                         <Route path="/login" component={LoginForm}/>
                         <Route path="/campaigns" component={PrivateRoute(Campaigns)}/>
+                        <Route path="/campaign/:id" component={PrivateRoute(Campaign)}/>
                     </Paper>
                 </div>
             </Router>

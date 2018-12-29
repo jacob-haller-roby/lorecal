@@ -17,8 +17,16 @@ export const myCampaigns = createSelector(myDmCampaigns, myPlayerCampaigns,
         )
 );
 
+export const selectedCampaignId = state => state.selected.campaignId;
+
+export const selectedCampaign = createSelector(myCampaigns, selectedCampaignId,
+    (campaigns, campaignId) => campaigns.find(campaign => campaign.id === campaignId)
+);
+
 export default {
     myCampaigns,
     myDmCampaigns,
-    myPlayerCampaigns
+    myPlayerCampaigns,
+    selectedCampaign,
+    selectedCampaignId
 }

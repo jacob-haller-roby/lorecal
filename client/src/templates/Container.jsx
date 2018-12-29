@@ -1,7 +1,7 @@
-const React = require('react');
-const PropTypes = require('prop-types');
-const {connect} = require('react-redux');
-const createReactClass = require('create-react-class');
+import React from 'react';
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import createReactClass from 'create-react-class';
 
 const Container = createReactClass({
 
@@ -19,7 +19,7 @@ const Container = createReactClass({
     }
 });
 
-module.exports = connect(
+export default connect(
     (state) => ({
     }),
     (dispatch) => ({

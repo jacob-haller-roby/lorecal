@@ -5,7 +5,11 @@ const ACTIONS = {
     LOGIN_FAILURE: undefined,
     LOGOUT: undefined,
     LOGIN_STATUS_CONFIRMED: undefined,
-    GET_CAMPAIGNS: undefined
+    GET_CAMPAIGNS: undefined,
+    CREATE_CAMPAIGN: undefined,
+
+    //SELECTS
+    SELECT_CAMPAIGN: undefined
 };
 
 export default keyMirror(ACTIONS);
