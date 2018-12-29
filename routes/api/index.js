@@ -1,7 +1,9 @@
 const express = require('express');
 const router = express.Router();
+const authenticate = require('/authenticate');
 const passport = require('/passport');
 const user = require('./user');
+const campaign = require('./campaign');
 
 router.post('/login', (req, res, next) => {
         passport.authenticate('local', (err, user, info) => {
@@ -20,5 +22,6 @@ router.get('/logout', function (req, res) {
 });
 
 router.use('/user', user);
+router.use('/campaign', authenticate.loggedIn, campaign);
 
 module.exports = router;

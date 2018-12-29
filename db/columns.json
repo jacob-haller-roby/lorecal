@@ -1,0 +1,24 @@
+{
+  "USERS": {
+    "USERNAME": "username",
+    "EMAIL": "email",
+    "PASSWORD": "password"
+  },
+
+  "CAMPAIGNS": {
+    "TITLE": "title",
+    "DESCRIPTION": "description",
+    "DM_ID": "dm_id"
+  },
+
+  "CAMPAIGN_PLAYERS": {
+    "PLAYER_ID": "player_id",
+    "CAMPAIGN_ID": "campaign_id"
+  },
+
+  "DEFAULT": {
+    "ID": "id",
+    "CREATED_AT": "created_at",
+    "UPDATED_AT": "updated_at"
+  }
+}
