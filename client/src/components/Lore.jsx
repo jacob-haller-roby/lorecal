@@ -1,9 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import createReactClass from 'create-react-class';
-import {Card, CardContent, CardHeader, Grid} from "@material-ui/core";
+import {Card, CardContent, CardHeader, Grid, Typography, Divider, withStyles} from "@material-ui/core";
 
-const Component = createReactClass({
+const styles = {
+    loreEntry: {
+        margin: 10
+    }
+};
+
+const Lore = createReactClass({
 
     propTypes: {
         loreEntries: PropTypes.array.isRequired
@@ -19,8 +25,8 @@ const Component = createReactClass({
         let minute = timeSplit[1];
         let ampm = hour < 12 ? 'AM' : 'PM';
 
-        if(hour === 0) hour = 12;
-        if(hour > 12) hour -= 12;
+        if (hour === 0) hour = 12;
+        if (hour > 12) hour -= 12;
 
         return hour + ':' + minute + ' ' + ampm;
 
@@ -28,8 +34,18 @@ const Component = createReactClass({
 
     renderLoreEntry(lore) {
         return <div key={lore.id}>
-            <p><b>At {this.militaryToStandard(lore.time)}</b></p>
-            <p>{lore.entry}</p>
+            <div className={this.props.classes.loreEntry}>
+                <Typography variant="subtitle1">
+                    <b>At {this.militaryToStandard(lore.time)}</b>
+                </Typography>
+                <Typography color="textSecondary" variant="caption">
+                    <i>Author: {lore.author.username}</i>
+                </Typography>
+                <Typography variant="body1">
+                    {lore.entry}
+                </Typography>
+            </div>
+            <Divider/>
         </div>
     },
 
@@ -47,4 +63,4 @@ const Component = createReactClass({
     }
 });
 
-export default Component;
+export default withStyles(styles)(Lore);
