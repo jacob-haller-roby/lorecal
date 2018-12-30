@@ -47,28 +47,31 @@ const Campaign = createReactClass({
         if (!this.routeMatchesRedux()) return <CircularProgressCentered/>;
 
         return (
-            <AnimatedTransition>
-                <Card>
-                    <CardHeader title={this.props.selectedCampaign.title}
-                                subheader={this.props.selectedCampaign.description}/>
-                    <CardContent>
-                        <Grid container>
-                            <Grid item xs={12}>
-                                <UploadImage submitImage={this.props.processImage}/>
+            <div>
+                <UploadImage submitImage={this.props.processImage}/>
+                <AnimatedTransition>
+                    <Card>
+                        <CardHeader title={this.props.selectedCampaign.title}
+                                    subheader={this.props.selectedCampaign.description}/>
+                        <CardContent>
+                            <Grid container>
+                                <Grid item xs={12}>
+
+                                </Grid>
+                                <Grid item xs={12} md={6}>
+                                    <AnimateGrid>
+                                        {Object.values(this.props.selectedLoreOrdered).map((loreEntries, i) => {
+                                            return (
+                                                <Lore loreEntries={loreEntries} key={i}/>
+                                            );
+                                        })}
+                                    </AnimateGrid>
+                                </Grid>
                             </Grid>
-                            <Grid item xs={12} md={6}>
-                                <AnimateGrid>
-                                    {Object.values(this.props.selectedLoreOrdered).map((loreEntries, i) => {
-                                        return (
-                                            <Lore loreEntries={loreEntries} key={i}/>
-                                        );
-                                    })}
-                                </AnimateGrid>
-                            </Grid>
-                        </Grid>
-                    </CardContent>
-                </Card>
-            </AnimatedTransition>
+                        </CardContent>
+                    </Card>
+                </AnimatedTransition>
+            </div>
         );
     }
 });

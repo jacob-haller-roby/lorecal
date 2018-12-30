@@ -13,7 +13,7 @@ const AnimateGrid = createReactClass({
     },
 
     getTimeout(i) {
-        return this.easeOutQuad(i+1, 0, 375, this.props.children.length);
+        return this.easeOutQuad(i+2, 0, 375, this.props.children.length+1);
     },
 
     easeOutQuad(t, b, c, d) {

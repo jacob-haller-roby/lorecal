@@ -6,12 +6,12 @@ import createReactClass from 'create-react-class';
 import {getMyCampaigns, createCampaign} from "../redux/actions/campaignActionCreator";
 import selectors from "../redux/selectors/index";
 import CampaignCard from '../components/CampaignCard';
-import {Grid} from '@material-ui/core';
+import {Fab} from '@material-ui/core';
 import {Add} from '@material-ui/icons';
-import FabFixed from '../components/FabFixed';
 import NewCampaignDialog from '../components/NewCampaignDialog';
 import AnimateGrid from '../components/AnimateGrid';
 import AnimateTransition from '../components/AnimateTransition';
+import FabContainer from "../components/FabContainer";
 
 
 const {myCampaigns} = selectors;
@@ -48,22 +48,27 @@ const Campaigns = createReactClass({
 
     render() {
         return (
-            <AnimateTransition>
-                <div>
-                    <AnimateGrid>
-                        {this.props.campaigns.map(campaign => (
-                            <CampaignCard key={campaign.id} campaign={campaign}/>
-                        ))}
-                    </AnimateGrid>
-                    <FabFixed onClick={this.openNewCampaignDialog}
-                              color="secondary">
+            <div>
+                <AnimateTransition>
+                    <div>
+                        <AnimateGrid>
+                            {this.props.campaigns.map(campaign => (
+                                <CampaignCard key={campaign.id} campaign={campaign}/>
+                            ))}
+                        </AnimateGrid>
+                    </div>
+                </AnimateTransition>
+                <FabContainer>
+                    <Fab onClick={this.openNewCampaignDialog}
+                         size="large"
+                         color="secondary">
                         <Add/>
-                    </FabFixed>
-                    <NewCampaignDialog open={this.state.newCampaignDialogOpen}
-                                       handleClose={this.closeNewCampaignDialog}
-                                       submit={this.props.createCampaign}/>
-                </div>
-            </AnimateTransition>
+                    </Fab>
+                </FabContainer>
+                <NewCampaignDialog open={this.state.newCampaignDialogOpen}
+                                   handleClose={this.closeNewCampaignDialog}
+                                   submit={this.props.createCampaign}/>
+            </div>
         );
     }
 });

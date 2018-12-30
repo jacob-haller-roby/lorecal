@@ -25,7 +25,6 @@ const getBody = (req) => {
 };
 
 router.get('/', (req, res) => {
-    console.log(req.params);
     Lore.find({
             [COLUMNS.LORE.CAMPAIGN_ID]: req.params.campaignId
         })

@@ -23,25 +23,10 @@ export const selectedCampaign = createSelector(myCampaigns, selectedCampaignId,
     (campaigns, campaignId) => campaigns.find(campaign => campaign.id === campaignId) || {}
 );
 
-export const selectedLoreOrdered = createSelector(selectedCampaign,
-    (campaign) => {
-        const result = {};
-        campaign.lore && campaign.lore.forEach(loreEntry => {
-            if(!result[loreEntry.day]) result[loreEntry.day] = [];
-            result[loreEntry.day].push(loreEntry);
-        });
-
-        Object.values(result).forEach(value => value.sort((a, b) => a.day - b.day));
-
-        return result;
-    }
-);
-
 export default {
     myCampaigns,
     myDmCampaigns,
     myPlayerCampaigns,
     selectedCampaign,
-    selectedCampaignId,
-    selectedLoreOrdered
+    selectedCampaignId
 }

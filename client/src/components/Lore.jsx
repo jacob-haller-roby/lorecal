@@ -9,25 +9,31 @@ const Component = createReactClass({
         loreEntries: PropTypes.array.isRequired
     },
 
-    getTimeString() {
-        const {time} = this.props.loreEntry;
-
-        const AM = parseInt(time.subString(0,2)) < 12
-    },
-
     getDay() {
         return this.props.loreEntries[0].day;
     },
 
+    militaryToStandard(time) {
+        const timeSplit = time.split(':');
+        let hour = parseInt(timeSplit[0]);
+        let minute = timeSplit[1];
+        let ampm = hour < 12 ? 'AM' : 'PM';
+
+        if(hour === 0) hour = 12;
+        if(hour > 12) hour -= 12;
+
+        return hour + ':' + minute + ' ' + ampm;
+
+    },
+
     renderLoreEntry(lore) {
         return <div key={lore.id}>
-            <p><b>At {lore.time}</b></p>
+            <p><b>At {this.militaryToStandard(lore.time)}</b></p>
             <p>{lore.entry}</p>
         </div>
     },
 
     render() {
-        const {loreEntry} = this.props;
         return (
             <Grid item xs={12}>
                 <Card>
