@@ -54,7 +54,6 @@ const Campaign = createReactClass({
 
     render() {
         if (!this.routeMatchesRedux()) return <CircularProgressCentered/>;
-        console.log(this.props.theme);
 
         return (
             <div>

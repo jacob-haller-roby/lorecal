@@ -5,7 +5,7 @@ import {Fab, withStyles, Zoom} from '@material-ui/core';
 const style = {
     fixed: {
         margin: 0,
-        zIndex: 999999999,
+        zIndex: 999,
         position: 'fixed',
         top: 'auto',
         bottom: 40,
