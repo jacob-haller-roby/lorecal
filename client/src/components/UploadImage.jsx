@@ -70,6 +70,7 @@ const UploadImage = createReactClass({
                     hidden
                     type="file"
                     onChange={this.selectImage}
+                    capture
                 />
                 <Button variant="contained" onClick={this.clickInput}>
                     Choose A File

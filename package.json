@@ -12,7 +12,9 @@
     "start": "concurrently \"npm run-script start:express\" \"npm run-script start:react\"",
     "start:react": "npm start --prefix ./client",
     "start:express": "npm run-script migrate && node ./bin/www",
-    "migrate": "./node_modules/knex/bin/cli.js migrate:latest"
+    "migrate": "./node_modules/knex/bin/cli.js migrate:latest",
+    "start:dev": "concurrently \"npm run-script start:express:dev\" \"npm run-script start:react\"",
+    "start:express:dev": "node ./bin/www --inspect"
   },
   "dependencies": {
     "bcrypt": "^3.0.3",

@@ -79,10 +79,10 @@ router.post('/process', (req, res) => {
             const dayRegex = /[dD]ay\s?[#*]\d+/g;
             const daySelectRegex = /\d+/;
 
-            const timeRegex = /\d{1,2}:\d{2}\s?([AaPp][Mm])?/g
+            const timeRegex = /\d{1,2}:\d{2}\s?(?:[AaPp][Mm])?/g;
 
-            const timeSelect = /\d{1,2}:\d{2}/
-            const ampmSelect = /[AaPp][Mm]/
+            const timeSelect = /\d{1,2}:\d{2}/;
+            const ampmSelect = /[AaPp][Mm]/;
 
             const textDaySplit = fullText.split(dayRegex);
 
