@@ -46,8 +46,6 @@ router.patch('/:loreId', (req, res) => {
 });
 
 router.post('/process', (req, res) => {
-    console.log('hit process endpoint');
-    console.log(req.body.image.substring(0, 100))
     request.post(
         `https://vision.googleapis.com/v1/images:annotate?key=${process.env.VISION_API_KEY}`,
         {
@@ -68,18 +66,93 @@ router.post('/process', (req, res) => {
             json: true
         },
         (err, httpResponse, body) => {
-            console.log(err);
+            if (err) {
+                return error(err, res);
+            }
+            if (body.error) {
+                return error(body.error, res);
+            }
 
-            //console.log(httpResponse.substring(0, 100))
-            //
-            //[0] [ 'code', 'message', 'status', 'details' ]
+            const fullText = body.responses[0].fullTextAnnotation.text;
 
-            //console.log(body.error.message.substring(0,200));
-            //console.log(body.error.details);
-            //console.log(httpResponse);
-            //console.log(body);
-            res.status(200).json(body);
-        })
+            const daySeparators = ["Day #\\d+", "day #\\d+", "Day#\\d+", "day#\\d+"];
+            const dayRegex = new RegExp(daySeparators.join('|'), 'g');
+            const daySelectRegex = new RegExp("\\d+");
+
+            const timeSeparators = ['\\d{1,2}:\\d{2} [AaPp][Mm]', '\\d{1,2}:\\d{2}[AaPp][Mm]', '\\d{1,2}:\\d{2}'];
+            const timeRegex = new RegExp(timeSeparators.join('|'), 'g');
+
+            const timeSelect = new RegExp('\\d{1,2}:\\d{2}');
+            const ampmSelect = new RegExp('[AaPp][Mm]');
+
+            const textDaySplit = fullText.split(dayRegex);
+
+            console.log('fullText: ', fullText);
+            console.log('textDaySplit: ', textDaySplit);
+            let match;
+            let timeMatch;
+
+            let dayIndex = 1;
+
+            Promise.resolve()
+                .then(() => {
+                    while ((match = dayRegex.exec(fullText)) != null) {
+                        let day = daySelectRegex.exec(match)[0];
+
+                        let dayText = textDaySplit[dayIndex];
+                        dayIndex++;
+                        let timeIndex = 1;
+
+                        const textSplitTime = dayText.split(timeRegex);
+
+                        while ((timeMatch = timeRegex.exec(dayText)) != null) {
+                            const entry = textSplitTime[timeIndex];
+                            timeIndex++;
+                            let time = timeSelect.exec(timeMatch[0])[0];
+                            let amPm = ampmSelect.exec(timeMatch[0]);
+
+                            if (amPm != null) {
+                                let timeArray = time.split(':');
+                                let hour = parseInt(timeArray[0]);
+                                let minute = parseInt(timeArray[1]);
+
+                                amPm = amPm[0].toUpperCase();
+
+                                if (amPm === 'PM' && hour !== 12) {
+                                    hour += 12;
+                                } else if (amPm === 'AM' && hour === 12) {
+                                    hour = 0;
+                                }
+
+                                time = hour + ':' + minute;
+                            }
+
+                            console.log('creating lore from image: ', {
+                                [COLUMNS.LORE.DAY]: day,
+                                [COLUMNS.LORE.TIME]: time,
+                                [COLUMNS.LORE.ENTRY]: entry,
+                                [COLUMNS.LORE.CAMPAIGN_ID]: req.params.campaignId
+                            });
+
+                            Lore.create({
+                                [COLUMNS.LORE.DAY]: day,
+                                [COLUMNS.LORE.TIME]: time,
+                                [COLUMNS.LORE.ENTRY]: entry,
+                                [COLUMNS.LORE.CAMPAIGN_ID]: req.params.campaignId,
+                                [COLUMNS.LORE.AUTHOR_ID]: req.user.id
+                            });
+
+                        }
+                    }
+                })
+                .then(() =>
+                    Lore.find({
+                            [COLUMNS.LORE.CAMPAIGN_ID]: req.params.campaignId
+                        })
+                        .then(lore => res.status(200).json(lore))
+                )
+                .catch((...err) => error(err, res));
+        });
 });
 
 

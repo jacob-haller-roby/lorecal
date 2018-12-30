@@ -6,7 +6,8 @@ import CircularProgressCentered from "./CircularProgressCentered";
 
 const styles = {
     fullWidth: {
-        width: '100%'
+        maxWidth: '100%',
+        maxHeight: '200px'
     }
 };
 
@@ -49,6 +50,7 @@ const UploadImage = createReactClass({
 
     submitImage() {
         this.props.submitImage(this.state.image);
+        this.setState({image: undefined});
     },
 
     render() {

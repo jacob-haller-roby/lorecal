@@ -49,4 +49,12 @@ export const getCampaignLore = (campaignId) =>
 export const processImage = (campaignId, image) =>
     dispatch =>
         post('campaign/' + campaignId + '/lore/process', {image})
-            .then(console.log)
+            .then(lore => {
+                dispatch({
+                    type: ACTIONS.GET_CAMPAIGN_LORE,
+                    payload: {
+                        campaignId,
+                        lore
+                    }
+                })
+            })
