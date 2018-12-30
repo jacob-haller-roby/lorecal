@@ -15,7 +15,18 @@ import LoginForm from './LoginForm';
 import Campaigns from './Campaigns';
 import Campaign from './Campaign';
 
-const Index = () => <h2>Home</h2>;
+const Index = () => <div>
+    <h2>
+        Welcome to LoreCal
+    </h2>
+    <h4>
+        Get started selecting a campaign from the Campaign Tab.
+    </h4>
+    <p>
+        Once inside a campaign, you can upload images of your campaign notes to have them processed and available to
+        everyone in your campaign in a simple, editable format!
+    </p>
+</div>;
 
 const styles = (theme) => ({
     toolbar: theme.mixins.toolbar
