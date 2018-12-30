@@ -36,7 +36,7 @@ const Lore = createReactClass({
         return <div key={lore.id}>
             <div className={this.props.classes.loreEntry}>
                 <Typography variant="subtitle1">
-                    <b>At {this.militaryToStandard(lore.time)}</b>
+                    <b>{this.militaryToStandard(lore.time)}</b>
                 </Typography>
                 <Typography color="textSecondary" variant="caption">
                     <i>Author: {lore.author.username}</i>
