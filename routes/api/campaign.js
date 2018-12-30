@@ -1,9 +1,10 @@
 const express = require('express');
-const router = express.Router();
+const router = express.Router({mergeParams: true});
 const error = require('./error');
+const lore = require('./lore');
 const Campaign = require('../../db/dao/Campaign');
 const COLUMNS = require('/db/columns');
-const TABLES = require('/db/tables');
+const TO_MANY = require('/db/toMany');
 
 const getBody = (req) => {
     if (Array.isArray(req.body)) {
@@ -37,7 +38,7 @@ router.get('/dm/:dmId', (req, res) => {
 
 router.get('/player/:playerId', (req, res) => {
     Campaign.find({
-            [`${TABLES.USERS}.${COLUMNS.DEFAULT.ID}`]: req.params.playerId
+            [`${TO_MANY.CAMPAIGNS.PLAYERS}.${COLUMNS.DEFAULT.ID}`]: req.params.playerId
         })
         .then(campaigns => res.json(campaigns))
         .catch((err) => error(err, res));
@@ -49,23 +50,37 @@ router.post('/', (req, res) => {
         .catch((err) => error(err, res));
 });
 
-router.patch('/:id', (req, res) => {
-    Campaign.update(req.params.id, getBody(req))
+router.patch('/:campaignId', (req, res) => {
+    Campaign.update(req.params.campaignId, getBody(req))
         .then(campaign => res.json(campaign))
         .catch((err) => error(err, res));
 });
 
-router.put('/:id/addPlayer/:playerId', (req, res) => {
-    Campaign.addPlayer(req.params.id, req.params.playerId)
+router.put('/:campaignId/addPlayer/:playerId', (req, res) => {
+    Campaign.addPlayer(req.params.campaignId, req.params.playerId)
         .then(campaign => res.json(campaign))
         .catch((err) => error(err, res));
 });
 
-router.put('/:id/removePlayer/:playerId', (req, res) => {
-    Campaign.removePlayer(req.params.id, req.params.playerId)
+router.put('/:campaignId/removePlayer/:playerId', (req, res) => {
+    Campaign.removePlayer(req.params.campaignId, req.params.playerId)
         .then(campaign => res.json(campaign))
         .catch((err) => error(err, res));
 });
 
+router.use('/:campaignId/lore', (req, res, next) => {
+    Campaign.findOne({id: req.params.campaignId})
+        .then(campaign => {
+            if (campaign.dm_id === req.user.id) {
+                return next();
+            }
+
+            if(campaign.users.some(user => user.id === req.user.id)) {
+                return next();
+            }
+
+            res.sendStatus(401)
+        })
+}, lore);
 
 module.exports = router;

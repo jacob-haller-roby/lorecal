@@ -1,0 +1,21 @@
+{
+  "USERS": {
+  },
+
+  "CAMPAIGNS": {
+    "DM": "dm"
+  },
+
+  "CAMPAIGN_PLAYERS": {
+    "PLAYER": "player",
+    "CAMPAIGN": "campaign"
+  },
+
+  "LORE": {
+    "CAMPAIGN": "campaign",
+    "AUTHOR": "author"
+  },
+
+  "DEFAULT": {
+  }
+}

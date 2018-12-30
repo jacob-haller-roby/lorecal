@@ -12,6 +12,14 @@ const AnimateGrid = createReactClass({
         this.setState({in: true});
     },
 
+    getTimeout(i) {
+        return this.easeOutQuad(i+1, 0, 375, this.props.children.length);
+    },
+
+    easeOutQuad(t, b, c, d) {
+        return -c *(t/=d)*(t-2) + b;
+    },
+
     render() {
         return (
             <Grid container spacing={8} {...this.props} >
@@ -19,7 +27,7 @@ const AnimateGrid = createReactClass({
                     <Slide in={this.state.in}
                            direction="right"
                            key={i}
-                           timeout={375 * (i + 2) / 2}>
+                           timeout={this.getTimeout(i)}>
                         {child}
                     </Slide>
                 ))}

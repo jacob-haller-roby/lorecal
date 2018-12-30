@@ -1,0 +1,18 @@
+{
+  "USERS": {
+    "PASSWORD": "password"
+  },
+
+  "CAMPAIGNS": {
+    "CAMPAIGN_PLAYERS": "campaign_players"
+  },
+
+  "CAMPAIGN_PLAYERS": {
+  },
+
+  "LORE": {
+  },
+
+  "DEFAULT": {
+  }
+}

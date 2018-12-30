@@ -1,5 +1,5 @@
 const express = require('express');
-const router = express.Router();
+const router = express.Router({mergeParams: true});
 const authenticate = require('/authenticate');
 const passport = require('/passport');
 const user = require('./user');

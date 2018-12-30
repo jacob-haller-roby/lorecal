@@ -15,7 +15,7 @@ const apiRouter = require('./routes/api');
 const app = express();
 
 app.use(logger('dev'));
-app.use(express.json());
+app.use(express.json({limit: '50mb', extended: true}));
 app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(sassMiddleware({
@@ -27,7 +27,12 @@ app.use(sassMiddleware({
 app.use(bodyParser.urlencoded({extended: true}));
 
 const sessionStore = new MySQLStore(knex_configs[process.env.NODE_ENV].connection);
-app.use(expressSession({secret: process.env.SESSION_SECRET, resave: true, saveUninitialized: false, store: sessionStore}));
+app.use(expressSession({
+    secret: process.env.SESSION_SECRET,
+    resave: true,
+    saveUninitialized: false,
+    store: sessionStore
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 

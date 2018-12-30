@@ -22,6 +22,7 @@ env_variables:
   SQL_DB: [redacted]
   INSTANCE_CONNECTION_NAME: [redacted] 
   COOKIE_SECRET: [redacted]
+  VISION_API_KEY: [redacted]
 
 handlers:
 - url: /stylesheets
@@ -43,4 +44,10 @@ If you have permissions, you can decode the encrypted file back to it's source w
 
 ```
 gcloud kms decrypt --ciphertext-file=app.yaml.enc --plaintext-file=app.yaml --location=global --keyring=mysql --key=mysql_connections
+```
+
+To connect to the google vision api, request should look like:
+
+```
+POST https://vision.googleapis.com/v1/images:annotate?key=YOUR_API_KEY
 ```

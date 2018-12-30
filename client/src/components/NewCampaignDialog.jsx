@@ -59,7 +59,7 @@ const NewCampaignDialog = createReactClass({
                                rows={15}/>
                 </DialogContent>
                 <DialogActions>
-                    <Button variant="contained"
+                    <Button variant="outlined"
                             color="secondary"
                             onClick={this.props.handleClose}
                             fullWidth>

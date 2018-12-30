@@ -1,5 +1,6 @@
 {
   "USERS": "users",
   "CAMPAIGNS": "campaigns",
-  "CAMPAIGN_PLAYERS": "campaign_players"
+  "CAMPAIGN_PLAYERS": "campaign_players",
+  "LORE": "lore"
 }

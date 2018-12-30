@@ -16,6 +16,14 @@
     "CAMPAIGN_ID": "campaign_id"
   },
 
+  "LORE": {
+    "DAY": "day",
+    "TIME": "time",
+    "ENTRY": "entry",
+    "CAMPAIGN_ID": "campaign_id",
+    "AUTHOR_ID": "author_id"
+  },
+
   "DEFAULT": {
     "ID": "id",
     "CREATED_AT": "created_at",

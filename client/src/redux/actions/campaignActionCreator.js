@@ -33,3 +33,20 @@ export const createCampaign = (campaignData) =>
                 });
                 history.push('/campaign/' + campaign.id);
             });
+
+export const getCampaignLore = (campaignId) =>
+    dispatch => get('campaign/' + campaignId + '/lore')
+        .then(lore =>
+            dispatch({
+                type: ACTIONS.GET_CAMPAIGN_LORE,
+                payload: {
+                    campaignId,
+                    lore
+                }
+            })
+        );
+
+export const processImage = (campaignId, image) =>
+    dispatch =>
+        post('campaign/' + campaignId + '/lore/process', {image})
+            .then(console.log)

@@ -6,7 +6,7 @@ export const myDmCampaigns = state => {
 };
 
 export const myPlayerCampaigns = state => {
-    return Object.values(state.campaigns).filter(campaign => campaign.users.some(user => user.id === state.session.currentUserId));
+    return Object.values(state.campaigns).filter(campaign => campaign.users && campaign.users.some(user => user.id === state.session.currentUserId));
 };
 
 export const myCampaigns = createSelector(myDmCampaigns, myPlayerCampaigns,
@@ -20,7 +20,21 @@ export const myCampaigns = createSelector(myDmCampaigns, myPlayerCampaigns,
 export const selectedCampaignId = state => state.selected.campaignId;
 
 export const selectedCampaign = createSelector(myCampaigns, selectedCampaignId,
-    (campaigns, campaignId) => campaigns.find(campaign => campaign.id === campaignId)
+    (campaigns, campaignId) => campaigns.find(campaign => campaign.id === campaignId) || {}
+);
+
+export const selectedLoreOrdered = createSelector(selectedCampaign,
+    (campaign) => {
+        const result = {};
+        campaign.lore && campaign.lore.forEach(loreEntry => {
+            if(!result[loreEntry.day]) result[loreEntry.day] = [];
+            result[loreEntry.day].push(loreEntry);
+        });
+
+        Object.values(result).forEach(value => value.sort((a, b) => a.day - b.day));
+
+        return result;
+    }
 );
 
 export default {
@@ -28,5 +42,6 @@ export default {
     myDmCampaigns,
     myPlayerCampaigns,
     selectedCampaign,
-    selectedCampaignId
+    selectedCampaignId,
+    selectedLoreOrdered
 }
