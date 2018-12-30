@@ -75,20 +75,17 @@ router.post('/process', (req, res) => {
 
             const fullText = body.responses[0].fullTextAnnotation.text;
 
-            const daySeparators = ["Day #\\d+", "day #\\d+", "Day#\\d+", "day#\\d+"];
-            const dayRegex = new RegExp(daySeparators.join('|'), 'g');
-            const daySelectRegex = new RegExp("\\d+");
 
-            const timeSeparators = ['\\d{1,2}:\\d{2} [AaPp][Mm]', '\\d{1,2}:\\d{2}[AaPp][Mm]', '\\d{1,2}:\\d{2}'];
-            const timeRegex = new RegExp(timeSeparators.join('|'), 'g');
+            const dayRegex = /[dD]ay\s?[#*]\d+/g;
+            const daySelectRegex = /\d+/;
 
-            const timeSelect = new RegExp('\\d{1,2}:\\d{2}');
-            const ampmSelect = new RegExp('[AaPp][Mm]');
+            const timeRegex = /\d{1,2}:\d{2}\s?([AaPp][Mm])?/g
+
+            const timeSelect = /\d{1,2}:\d{2}/
+            const ampmSelect = /[AaPp][Mm]/
 
             const textDaySplit = fullText.split(dayRegex);
 
-            console.log('fullText: ', fullText);
-            console.log('textDaySplit: ', textDaySplit);
             let match;
             let timeMatch;
 
